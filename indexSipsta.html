@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sipsta – Modern Rituals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── VARIABLES ── */
+    :root {
+      --vert:    #3a5a1c;
+      --vert-f:  #2a4210;
+      --vert-cl: #5a8a2c;
+      --creme:   #f5f0e6;
+      --creme-f: #ede5d0;
+      --marron:  #6b2a0e;
+      --or:      #c8973a;
+      --blanc:   #ffffff;
+      --texte:   #2a3a1a;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito', sans-serif; background: var(--creme); color: var(--texte); overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--creme);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    }
+    .nav-logo { height: 52px; mix-blend-mode: multiply; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a { font-weight: 700; font-size: .95rem; color: var(--vert-f); transition: color .2s; }
+    .nav-links a:hover { color: var(--or); }
+    .nav-cta {
+      background: var(--or); color: var(--blanc) !important;
+      padding: 10px 22px; border-radius: 30px;
+      font-weight: 800 !important; font-size: .9rem !important;
+      transition: background .2s, transform .15s !important;
+    }
+    .nav-cta:hover { background: var(--vert) !important; transform: scale(1.04); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-burger span { width: 26px; height: 3px; background: var(--vert-f); border-radius: 2px; transition: .3s; }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      background: var(--vert);
+      overflow: hidden; white-space: nowrap;
+      padding: 10px 0;
+    }
+    .ticker-track {
+      display: inline-flex; gap: 0;
+      animation: ticker 22s linear infinite;
+    }
+    .ticker-track span {
+      color: var(--creme); font-weight: 700; font-size: .88rem;
+      letter-spacing: .04em; padding: 0 28px;
+    }
+    .ticker-track span::before { content: "♥  "; color: var(--or); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--vert);
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 580px; position: relative; overflow: hidden;
+    }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-right {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 60px 7% 60px 5%; position: relative; z-index: 2;
+    }
+    .hero-badge {
+      position: absolute; top: 28px; right: 28px;
+      width: 110px; height: 110px;
+      background: var(--vert-cl); border-radius: 50%;
+      border: 3px solid rgba(255,255,255,.3);
+      display: flex; align-items: center; justify-content: center;
+      animation: rotateBadge 14s linear infinite;
+    }
+    .hero-badge-inner {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-badge-inner svg { width: 40px; fill: var(--creme); opacity: .9; }
+    .badge-text {
+      width: 100%; height: 100%;
+      animation: rotateBadge 14s linear infinite;
+    }
+    @keyframes rotateBadge { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+    .hero-card {
+      background: var(--creme); border-radius: 8px;
+      padding: 36px 40px; box-shadow: 0 12px 40px rgba(0,0,0,.25);
+    }
+    .hero-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: var(--vert-f); line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero-card p { font-size: 1rem; line-height: 1.7; color: #444; margin-bottom: 28px; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--vert-f); color: var(--blanc);
+      padding: 13px 28px; border-radius: 4px;
+      font-weight: 800; font-size: .95rem;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--vert); transform: translateY(-2px); }
+
+    /* ── POURQUOI ── */
+    .pourquoi {
+      background: var(--creme);
+      text-align: center;
+      padding: 80px 5%;
+    }
+    .pourquoi h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--vert-f); margin-bottom: 10px;
+    }
+    .pourquoi-sub { color: #666; font-size: 1rem; line-height: 1.6; margin-bottom: 60px; }
+    .pourquoi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1100px; margin: 0 auto 48px; }
+    .pourquoi-item { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .pourquoi-icon {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--vert); display: flex; align-items: center; justify-content: center;
+      transition: transform .25s;
+    }
+    .pourquoi-icon:hover { transform: scale(1.1); }
+    .pourquoi-icon svg { width: 36px; fill: none; stroke: var(--creme); stroke-width: 2; }
+    .pourquoi-icon.plain svg { fill: var(--creme); stroke: none; }
+    .pourquoi-item h3 { font-weight: 800; color: var(--vert-cl); font-size: 1rem; }
+    .pourquoi-item p { font-size: .88rem; color: #555; line-height: 1.6; text-align: center; }
+
+    /* ── BANDE D'IMAGES ── */
+    .img-strip { display: grid; height: 280px; overflow: hidden; }
+    .img-strip.cols3 { grid-template-columns: repeat(3, 1fr); }
+    .img-strip.cols4 { grid-template-columns: repeat(4, 1fr); }
+    .img-strip img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .img-strip img:hover { transform: scale(1.04); }
+
+    /* ── GAMME ── */
+    .gamme {
+      background: var(--vert);
+      padding: 80px 5%;
+      text-align: center;
+    }
+    .gamme-ticker-wrap {
+      overflow: hidden; white-space: nowrap;
+      margin-bottom: 48px;
+    }
+    .gamme-ticker {
+      display: inline-flex;
+      animation: ticker 18s linear infinite;
+    }
+    .gamme-ticker span {
+      color: var(--creme); font-weight: 800; font-size: .85rem;
+      letter-spacing: .1em; text-transform: uppercase; padding: 0 20px;
+      opacity: .8;
+    }
+    .gamme-ticker span::before { content: "· "; }
+    .gamme h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--blanc); margin-bottom: 14px;
+    }
+    .gamme-intro { color: rgba(255,255,255,.75); font-size: 1rem; line-height: 1.7; max-width: 640px; margin: 0 auto 56px; }
+    .produits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto 48px; }
+    .produit-card {
+      background: var(--creme); border-radius: 8px;
+      overflow: hidden; transition: transform .25s, box-shadow .25s;
+    }
+    .produit-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,.3); }
+    .produit-img-wrap {
+      position: relative; height: 260px; overflow: hidden;
+      background: var(--blanc);
+    }
+    .produit-img-wrap img {
+      width: 100%; height: 100%; object-fit: contain;
+      padding: 16px;
+      transition: opacity .4s;
+      position: absolute; top: 0; left: 0;
+    }
+    .produit-img-wrap .img-ambiance {
+      opacity: 0;
+      object-fit: cover;
+      padding: 0;
+    }
+    .produit-card:hover .img-principale { opacity: 0; }
+    .produit-card:hover .img-ambiance { opacity: 1; }
+    .produit-info { padding: 22px; border-top: 1px solid var(--creme-f); }
+    .produit-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; color: var(--vert-f);
+      margin-bottom: 10px;
+    }
+    .produit-sep { width: 30px; height: 2px; background: var(--or); margin-bottom: 12px; }
+    .produit-info p { font-size: .88rem; color: #555; line-height: 1.6; margin-bottom: 10px; }
+    .produit-ingr { font-size: .78rem !important; color: #888 !important; }
+    .voir-plus { color: var(--vert-cl); font-weight: 700; font-size: .85rem; }
+
+    /* ── FOCUS PRODUIT ── */
+    .focus {
+      background: var(--creme);
+      padding: 80px 5%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .focus-texte h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      color: var(--vert-f); margin-bottom: 20px; font-style: italic;
+    }
+    .focus-texte p { font-size: .95rem; color: #555; line-height: 1.8; margin-bottom: 24px; }
+    .focus-points h4 { text-transform: uppercase; font-size: .8rem; letter-spacing: .1em; color: #888; margin-bottom: 20px; }
+    .focus-point { margin-bottom: 18px; }
+    .focus-point strong { color: var(--vert-f); font-weight: 800; }
+    .focus-point span { font-size: .9rem; color: #555; }
+    .focus-img { width: 100%; height: 440px; object-fit: cover; border-radius: 8px; }
+
+    /* ── HISTOIRE ── */
+    .histoire {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 340px;
+    }
+    .histoire-gauche {
+      background: var(--marron);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 60px 8%;
+      gap: 20px;
+    }
+    .histoire-gauche h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      color: var(--blanc); line-height: 1.2;
+    }
+    .histoire-gauche .sep { width: 30px; height: 2px; background: rgba(255,255,255,.4); }
+    .btn-outline {
+      display: inline-block; border: 2px solid var(--blanc); color: var(--blanc);
+      padding: 11px 24px; border-radius: 4px; font-weight: 800; font-size: .9rem;
+      width: fit-content; transition: background .2s, color .2s;
+    }
+    .btn-outline:hover { background: var(--blanc); color: var(--marron); }
+    .histoire-droite {
+      background: var(--creme);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 60px 8%;
+    }
+    .histoire-droite h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--vert-f); margin-bottom: 18px; }
+    .histoire-droite p { font-size: .95rem; color: #555; line-height: 1.8; margin-bottom: 16px; }
+
+    /* ── OÙ TROUVER ── */
+    .ou-trouver { background: var(--creme-f); padding: 80px 5%; }
+    .ou-trouver h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--vert-f); text-align: center; margin-bottom: 48px;
+    }
+    .ou-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 960px; margin: 0 auto; }
+    .ou-card {
+      background: var(--blanc); border-radius: 8px; padding: 36px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    }
+    .ou-card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .ou-card-header svg { width: 32px; height: 32px; fill: var(--vert-cl); }
+    .ou-card-header h3 { font-weight: 800; font-size: 1.05rem; color: var(--vert-f); }
+    .ou-card p { font-size: .9rem; color: #666; line-height: 1.6; margin-bottom: 20px; }
+    .logos-magasin { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+    .logos-magasin img { height: 56px; object-fit: contain; mix-blend-mode: multiply; }
+    .salon-pills { display: flex; gap: 10px; flex-wrap: wrap; }
+    .pill {
+      background: var(--creme); border-radius: 20px;
+      padding: 7px 16px; font-size: .82rem; font-weight: 700; color: var(--marron);
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      background: var(--marron);
+      padding: 80px 5%; text-align: center;
+    }
+    .contact h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--blanc); margin-bottom: 10px;
+    }
+    .contact-sub { color: rgba(255,255,255,.7); font-size: 1rem; margin-bottom: 48px; }
+    .contact-form {
+      max-width: 680px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+      text-align: left;
+    }
+    .contact-form .full { grid-column: 1 / -1; }
+    .form-label { display: block; font-size: .82rem; font-weight: 700; color: rgba(255,255,255,.75); margin-bottom: 6px; }
+    .form-input {
+      width: 100%; padding: 12px 16px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+      border-radius: 6px; color: var(--blanc); font-family: 'Nunito', sans-serif; font-size: .95rem;
+      transition: border-color .2s, background .2s;
+    }
+    .form-input::placeholder { color: rgba(255,255,255,.35); }
+    .form-input:focus { outline: none; border-color: var(--or); background: rgba(255,255,255,.15); }
+    textarea.form-input { resize: vertical; min-height: 110px; }
+    .form-check { display: flex; align-items: flex-start; gap: 10px; }
+    .form-check input { margin-top: 3px; accent-color: var(--or); }
+    .form-check label { font-size: .82rem; color: rgba(255,255,255,.6); }
+    .btn-submit {
+      grid-column: 1 / -1; background: var(--creme); color: var(--marron);
+      border: none; cursor: pointer;
+      padding: 14px 36px; border-radius: 4px; font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: 1rem; transition: background .2s, transform .15s;
+    }
+    .btn-submit:hover { background: var(--blanc); transform: translateY(-2px); }
+    #form-success {
+      display: none; grid-column: 1/-1;
+      background: rgba(255,255,255,.15); border-radius: 8px; padding: 20px;
+      color: var(--blanc); text-align: center; font-weight: 700;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--creme-f);
+      padding: 36px 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo { height: 60px; mix-blend-mode: multiply; }
+    .footer-copy { font-size: .82rem; color: #888; text-align: center; }
+    .footer-social { display: flex; gap: 14px; }
+    .social-icon {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--vert-f); display: flex; align-items: center; justify-content: center;
+      transition: background .2s, transform .2s;
+    }
+    .social-icon:hover { background: var(--or); transform: scale(1.1); }
+    .social-icon svg { width: 18px; fill: var(--blanc); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: var(--creme); padding: 20px 5%; box-shadow: 0 8px 20px rgba(0,0,0,.1); gap: 18px; }
+      .nav-links.open { display: flex; }
+      .nav-burger { display: flex; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-img { height: 260px; }
+      .hero-right { padding: 40px 5%; }
+      .pourquoi-grid { grid-template-columns: repeat(2, 1fr); }
+      .produits-grid { grid-template-columns: repeat(2, 1fr); }
+      .focus { grid-template-columns: 1fr; }
+      .focus-img { height: 300px; }
+      .histoire { grid-template-columns: 1fr; }
+      .ou-grid { grid-template-columns: 1fr; }
+      .contact-form { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .pourquoi-grid { grid-template-columns: 1fr; }
+      .produits-grid { grid-template-columns: 1fr; }
+      .img-strip.cols4 { grid-template-columns: repeat(2, 1fr); height: 360px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <img src="images/logo.png" alt="Sipsta Modern Rituals" class="nav-logo">
+  <div class="nav-links" id="navLinks">
+    <a href="#accueil">Accueil</a>
+    <a href="#histoire">Notre histoire</a>
+    <a href="#gamme">Notre Gamme</a>
+    <a href="#ou-acheter">Où acheter ?</a>
+    <a href="#contact" class="nav-cta">Nous contacter</a>
+  </div>
+  <div class="nav-burger" id="burger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span>Nouveau – Déjà disponible chez Carrefour</span>
+    <span>Nouveau – Déjà disponible chez Carrefour</span>
+    <span>Nouveau – Déjà disponible chez Carrefour</span>
+    <span>Nouveau – Déjà disponible chez Carrefour</span>
+    <span>Nouveau – Déjà disponible chez Carrefour</span>
+    <span>Nouveau – Déjà disponible chez Carrefour</span>
+    <span>Nouveau – Déjà disponible chez Carrefour</span>
+    <span>Nouveau – Déjà disponible chez Carrefour</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <img src="images/banner1.png" alt="Matcha latte Sipsta" class="hero-img">
+  <div class="hero-right">
+    <div class="hero-badge" aria-hidden="true">
+      <svg class="badge-text" viewBox="0 0 110 110">
+        <defs>
+          <path id="circle" d="M 55,55 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"/>
+        </defs>
+        <text fill="#f5f0e6" font-size="11.5" font-weight="700" letter-spacing="2" font-family="Nunito, sans-serif">
+          <textPath href="#circle">JUSTE AVEC DE L'EAU · JUSTE AVEC DE L'EAU ·</textPath>
+        </text>
+      </svg>
+      <div class="hero-badge-inner">
+        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h1>Votre rituel,<br>en un instant&nbsp;!</h1>
+      <p>Oubliez les machines, le lait, et les matins compliqués. Sipsta, c'est un latte onctueux digne d'un coffee shop — préparé en 2 minutes, juste avec de l'eau chaude ou froide. Matcha, Chaï, Cacao… Choisissez votre rituel, on s'occupe du reste.</p>
+      <a href="#gamme" class="btn-primary">Découvrir la gamme</a>
+    </div>
+  </div>
+</section>
+
+<!-- POURQUOI SIPSTA -->
+<section class="pourquoi">
+  <h2>Pourquoi Sipsta ?</h2>
+  <p class="pourquoi-sub">Des rituels modernes, accessibles à tous !<br>Pas de compromis. Ni sur le goût, ni sur les ingrédients, ni sur votre temps.</p>
+  <div class="pourquoi-grid">
+    <div class="pourquoi-item">
+      <div class="pourquoi-icon plain">
+        <svg viewBox="0 0 24 24"><path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8z"/></svg>
+      </div>
+      <h3>Juste de l'eau</h3>
+      <p>Pas de lait, ni de machine. Grâce à notre formulation unique à base de poudre d'avoine sans gluten, l'eau suffit à recréer la texture riche et onctueuse d'un vrai latte. Prêt en 2 minutes !</p>
+    </div>
+    <div class="pourquoi-item">
+      <div class="pourquoi-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h3>Chaud ou froid</h3>
+      <p>Adapté à toutes les saisons et à toutes les envies. En hiver comme en été, votre rituel vous suit — chaud ou glacé selon l'humeur.</p>
+    </div>
+    <div class="pourquoi-item">
+      <div class="pourquoi-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>Bio et Fairtrade</h3>
+      <p>Certifié Agriculture Biologique (AB) et Fairtrade Max Havelaar. Des ingrédients soigneusement sélectionnés pour être bons pour vous et pour la planète.</p>
+    </div>
+    <div class="pourquoi-item">
+      <div class="pourquoi-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <h3>À emporter</h3>
+      <p>En doypack 160g ou en sticks individuels, Sipsta s'adapte à votre rythme. Au bureau, en voyage, en sac à main — votre rituel vous accompagne partout.</p>
+    </div>
+  </div>
+  <a href="#gamme" class="btn-primary">Voir nos produits</a>
+</section>
+
+<!-- BANDE IMAGES 1 -->
+<div class="img-strip cols3">
+  <img src="images/strip1_a.jpg" alt="Matcha latte préparation">
+  <img src="images/strip1_b.jpg" alt="Matcha texture">
+  <img src="images/strip1_c.jpg" alt="Matcha mousse">
+</div>
+
+<!-- GAMME -->
+<section class="gamme" id="gamme">
+  <div class="gamme-ticker-wrap">
+    <div class="gamme-ticker">
+      <span>BIO AB</span><span>FAIRTRADE</span><span>SANS LACTOSE</span><span>SANS GLUTEN</span><span>COLLAGÈNE VÉGÉTARIEN</span>
+      <span>BIO AB</span><span>FAIRTRADE</span><span>SANS LACTOSE</span><span>SANS GLUTEN</span><span>COLLAGÈNE VÉGÉTARIEN</span>
+      <span>BIO AB</span><span>FAIRTRADE</span><span>SANS LACTOSE</span><span>SANS GLUTEN</span><span>COLLAGÈNE VÉGÉTARIEN</span>
+    </div>
+  </div>
+  <h2>Notre gamme</h2>
+  <p class="gamme-intro">Deux formats, une promesse : le plaisir d'un vrai latte, en un instant. Sipsta, c'est une gamme pensée pour s'adapter à tous vos moments. En doypack 160g ou en sticks individuels — chaque recette est certifiée Bio et Fairtrade, préparée juste avec de l'eau.</p>
+
+  <div class="produits-grid">
+
+    <!-- Matcha Latte -->
+    <div class="produit-card">
+      <div class="produit-img-wrap">
+        <img src="images/prod_matcha_latte.jpg" alt="Matcha Latte" class="img-principale">
+        <img src="images/ambiance_matcha.png" alt="Ambiance Matcha Latte" class="img-ambiance">
+      </div>
+      <div class="produit-info">
+        <h3>Matcha Latte</h3>
+        <div class="produit-sep"></div>
+        <p>Le classique incontournable. Doux, herbacé et onctueux, il se prépare en 2 minutes avec de l'eau chaude ou froide. Un rituel accessible à tous.</p>
+        <p class="produit-ingr">Ingrédients : Poudre d'avoine instantanée sans gluten* 77%, Sucre de canne*, Thé vert Matcha premium* 8%…</p>
+      </div>
+    </div>
+
+    <!-- Matcha Latte Vanille -->
+    <div class="produit-card">
+      <div class="produit-img-wrap">
+        <img src="images/prod_vanille.jpg" alt="Matcha Latte Vanille" class="img-principale">
+        <img src="images/ambiance_vanille.png" alt="Ambiance Vanille" class="img-ambiance">
+      </div>
+      <div class="produit-info">
+        <h3>Matcha Latte Vanille</h3>
+        <div class="produit-sep"></div>
+        <p>La douceur réconfortante de la vanille rencontre le matcha. Une association gourmande et naturelle pour les amateurs de saveurs rondes.</p>
+        <p class="produit-ingr">Ingrédients : Poudre d'avoine instantanée sans gluten* 79%, Sucre de canne*, Thé vert Matcha premium* 6%…</p>
+      </div>
+    </div>
+
+    <!-- Chaï Latte -->
+    <div class="produit-card">
+      <div class="produit-img-wrap">
+        <img src="images/prod_chai.jpg" alt="Chaï Latte" class="img-principale">
+        <img src="images/ambiance_chai.png" alt="Ambiance Chaï" class="img-ambiance">
+      </div>
+      <div class="produit-info">
+        <h3>Chaï Latte</h3>
+        <div class="produit-sep"></div>
+        <p>L'évasion épicée parfaite. Gingembre, cardamome, cannelle… Un mélange chaleureux à déguster chaud en hiver ou glacé en été.</p>
+        <p class="produit-ingr">Ingrédients : Poudre d'avoine instantanée sans gluten* 79.5%, Sucre de canne*, Épices* (cannelle*, clou de …</p>
+      </div>
+    </div>
+
+    <!-- Super Matcha Latte Cacao -->
+    <div class="produit-card">
+      <div class="produit-img-wrap">
+        <img src="images/prod_super.jpg" alt="Super Matcha Latte Cacao" class="img-principale">
+        <img src="images/ambiance_super.png" alt="Ambiance Super Matcha" class="img-ambiance">
+      </div>
+      <div class="produit-info">
+        <h3>Super Matcha Latte Cacao, Collagène et Lion's Mane</h3>
+        <div class="produit-sep"></div>
+        <p>La boisson fonctionnelle gourmande. Matcha + cacao + collagène végétarien + champignon Lion's Mane pour prendre soin de soi au quotidien, avec plaisir.</p>
+        <p class="produit-ingr">Ingrédients : Poudre d'avoine instantanée sans gluten* 69%, Sucre de canne*, Thé vert Matcha premium* 6%…</p>
+      </div>
+    </div>
+
+    <!-- Matcha Premium 100% -->
+    <div class="produit-card">
+      <div class="produit-img-wrap">
+        <img src="images/prod_matcha_pur.jpg" alt="Matcha Premium 100%" class="img-principale">
+        <img src="images/ambiance_pur.png" alt="Ambiance Matcha Premium" class="img-ambiance">
+      </div>
+      <div class="produit-info">
+        <h3>Matcha Premium 100%</h3>
+        <div class="produit-sep"></div>
+        <p>La pureté du thé vert en poudre. 100% poudre de matcha bio pour vos boissons premium et vos recettes de cuisine. Format doypack 50g.</p>
+        <p class="produit-ingr">Ingrédients : 100% Poudre de thé vert Matcha* premium. *Produit issu de l'Agriculture Biologique.</p>
+      </div>
+    </div>
+
+    <!-- Sticks Matcha Premium -->
+    <div class="produit-card">
+      <div class="produit-img-wrap">
+        <img src="images/prod_sticks.png" alt="Sticks Matcha Premium 100%" class="img-principale">
+        <img src="images/ambiance_matcha.png" alt="Ambiance Sticks Matcha" class="img-ambiance">
+      </div>
+      <div class="produit-info">
+        <h3>Sticks de Matcha Premium 100%</h3>
+        <div class="produit-sep"></div>
+        <p>Votre rituel matcha en format nomade. 20 sticks individuels à glisser dans votre sac, pour un matcha parfait où que vous soyez.</p>
+        <p class="produit-ingr">Ingrédients : 100% Poudre de thé vert Matcha* premium. *Produit issu de l'Agriculture Biologique.</p>
+      </div>
+    </div>
+
+  </div>
+  <a href="#contact" class="btn-primary" style="background:var(--creme);color:var(--vert-f);">Nous contacter</a>
+</section>
+
+<!-- FOCUS PRODUIT -->
+<section style="background:var(--creme); padding: 80px 5%;">
+  <div class="focus" style="padding:0; max-width:1100px; margin:0 auto;">
+    <div class="focus-texte">
+      <h2>— Gros plan sur notre Super Matcha Cacao —</h2>
+      <p>On a pris notre Matcha Latte préféré, et on est allés encore plus loin. Le Super Matcha Latte Cacao associe la puissance antioxydante du matcha bio, la douceur réconfortante du cacao, et deux ingrédients bien-être d'exception : du collagène végétarien et du Lion's Mane, un champignon adaptogène reconnu pour soutenir la clarté mentale et la concentration au quotidien.</p>
+      <div class="focus-points">
+        <h4>CE QUI FAIT LA DIFFÉRENCE :</h4>
+        <div class="focus-point">
+          <strong>Lion's Mane</strong><span> – Champignon adaptogène reconnu pour ses bienfaits sur la clarté mentale, la concentration et l'énergie cognitive. Un allié du quotidien, naturellement.</span>
+        </div>
+        <div class="focus-point">
+          <strong>Collagène végétarien</strong><span> – Issu de membrane de coquilles d'œufs, il prend soin de votre peau et de vos articulations, en toute gourmandise.</span>
+        </div>
+        <div class="focus-point">
+          <strong>Matcha premium + Cacao</strong><span> – Un duo antioxydant puissant et savoureux. Bio AB, Fairtrade, sans compromis sur le goût.</span>
+        </div>
+      </div>
+    </div>
+    <img src="images/ambiance_super.png" alt="Super Matcha Latte Cacao" class="focus-img">
+  </div>
+</section>
+
+<!-- NOTRE HISTOIRE -->
+<section class="histoire" id="histoire">
+  <div class="histoire-gauche">
+    <div style="font-size:2.5rem;">🇫🇷</div>
+    <h2>Notre<br>histoire</h2>
+    <div class="sep"></div>
+    <a href="#contact" class="btn-outline">Nous contacter</a>
+  </div>
+  <div class="histoire-droite">
+    <h3>Nous connaître</h3>
+    <p>Sipsta, c'est une toute jeune marque française 🇫🇷 née d'une conviction simple : les meilleures boissons ne devraient pas demander de machines complexes, de compétences barista ou de longue préparation.</p>
+    <p>Derrière Sipsta, une petite équipe de passionnés : trois personnes, beaucoup de bonne humeur et une obsession : ramener l'expérience du coffee shop à la maison, sans prise de tête. Notre mood ? Du chill, de la gourmandise, et des ingrédients qu'on est fiers de choisir : bio, équitables, végétaux.</p>
+    <p>Juste de l'eau, et votre moment de plaisir commence !</p>
+  </div>
+</section>
+
+<!-- BANDE IMAGES 2 -->
+<div class="img-strip cols4">
+  <img src="images/strip2_a.jpg" alt="Matcha glacé">
+  <img src="images/strip2_b.jpg" alt="Poudre matcha">
+  <img src="images/strip2_c.jpg" alt="Latte art">
+  <img src="images/strip2_d.jpg" alt="Cacao poudre">
+</div>
+
+<!-- OÙ TROUVER -->
+<section class="ou-trouver" id="ou-acheter">
+  <h2>Où nous trouver ?</h2>
+  <div class="ou-grid">
+    <div class="ou-card">
+      <div class="ou-card-header">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <h3>En magasin</h3>
+      </div>
+      <p>Disponible dans le rayon boissons chaudes & bien-être de votre Carrefour, dès maintenant !</p>
+      <div class="logos-magasin">
+        <img src="images/carrefour.png" alt="Carrefour">
+        <img src="images/carrefour_market.png" alt="Carrefour Market">
+      </div>
+    </div>
+    <div class="ou-card">
+      <div class="ou-card-header">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <h3>Nos salons</h3>
+      </div>
+      <p>Retrouvez-nous sur les prochains salons* pour goûter nos produits en direct !<br><em style="font-size:.8rem;">*Nos salons sont des événements professionnels dédiés aux acheteurs et distributeurs.</em></p>
+      <div class="salon-pills">
+        <span class="pill">10 & 11 Juin : Salon Carrefour</span>
+        <span class="pill">17-21 Octobre : SIAL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2>Nous contacter</h2>
+  <p class="contact-sub">Distribution, partenariat, presse, ou simplement pour nous dire bonjour — on répond toujours avec plaisir !</p>
+  <form class="contact-form" id="contactForm" action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST">
+    <div>
+      <label class="form-label" for="prenom">Prénom *</label>
+      <input class="form-input" type="text" id="prenom" name="prenom" placeholder="Saisissez votre prénom" required>
+    </div>
+    <div>
+      <label class="form-label" for="nom">Nom *</label>
+      <input class="form-input" type="text" id="nom" name="nom" placeholder="Saisissez votre nom" required>
+    </div>
+    <div class="full">
+      <label class="form-label" for="email">E-mail *</label>
+      <input class="form-input" type="email" id="email" name="email" placeholder="Saisissez votre e-mail" required>
+    </div>
+    <div>
+      <label class="form-label" for="tel">Téléphone</label>
+      <input class="form-input" type="tel" id="tel" name="tel" placeholder="+33 6 00 00 00 00">
+    </div>
+    <div>
+      <label class="form-label" for="entreprise">Nom de l'entreprise</label>
+      <input class="form-input" type="text" id="entreprise" name="entreprise" placeholder="Votre entreprise">
+    </div>
+    <div class="full">
+      <label class="form-label" for="objet">Objet</label>
+      <input class="form-input" type="text" id="objet" name="objet" placeholder="Ex. Informations sur les tarifs">
+    </div>
+    <div class="full">
+      <label class="form-label" for="profil">Vous êtes… *</label>
+      <input class="form-input" type="text" id="profil" name="profil" placeholder="Distributeur, revendeur, journaliste…" required>
+    </div>
+    <div class="full">
+      <label class="form-label" for="message">Votre message</label>
+      <textarea class="form-input" id="message" name="message" placeholder="Saisissez le texte ici"></textarea>
+    </div>
+    <div class="full form-check">
+      <input type="checkbox" id="rgpd" name="rgpd" required>
+      <label for="rgpd">En envoyant ce formulaire, vous acceptez que vos données soient traitées conformément à notre Politique de Confidentialité. *</label>
+    </div>
+    <div id="form-success">✅ Message envoyé ! Nous vous répondrons très vite.</div>
+    <button type="submit" class="btn-submit">Envoyer</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="images/logo.png" alt="Sipsta" class="footer-logo">
+  <p class="footer-copy">© Sipsta 2026. Tous droits réservés.<br>Mentions légales & Politique de Confidentialité</p>
+  <div class="footer-social">
+    <a href="https://www.fileane.fr" target="_blank" class="social-icon" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="https://www.fileane.fr" target="_blank" class="social-icon" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+    <a href="https://www.fileane.fr" target="_blank" class="social-icon" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+  // Menu burger mobile
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Formulaire Formspree avec feedback
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    btn.textContent = 'Envoi en cours…';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        document.getElementById('form-success').style.display = 'block';
+        form.reset();
+        btn.style.display = 'none';
+      } else {
+        btn.textContent = 'Erreur, réessayez';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Erreur, réessayez';
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
